@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosie's Gallery - La magia del arte</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f3e9;
+            color: #333;
+        }
+        
+        header {
+            background-color: #e8c4c4;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #d4a5a5;
+        }
+        
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #6d4545;
+            font-style: italic;
+        }
+        
+        nav {
+            background-color: #6d4545;
+            padding: 10px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #8a5a5a;
+        }
+        
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(109, 69, 69, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #e8c4c4;
+            color: #6d4545;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #d4a5a5;
+        }
+        
+        .btn-primary {
+            background-color: #6d4545;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #8a5a5a;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #6d4545;
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 250px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.2em;
+            margin: 0 0 10px;
+            color: #6d4545;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: #8a5a5a;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .search-bar {
+            display: flex;
+            margin: 20px 0;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #d4a5a5;
+            border-radius: 5px 0 0 5px;
+            font-size: 1em;
+        }
+        
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #6d4545;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        .newsletter {
+            background-color: #e8c4c4;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .newsletter h2 {
+            color: #6d4545;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #d4a5a5;
+            border-radius: 5px 0 0 5px;
+            font-size: 1em;
+        }
+        
+        .newsletter-form button {
+            padding: 10px 20px;
+            background-color: #6d4545;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: #6d4545;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-icons {
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5em;
+        }
+        
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #6d4545;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e8c4c4;
+            color: #6d4545;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.7em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Estilos para el modal del carrito */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        .cart-items {
+            margin: 20px 0;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: bold;
+            margin: 0 0 5px;
+        }
+        
+        .cart-item-price {
+            color: #8a5a5a;
+        }
+        
+        .cart-item-remove {
+            color: #d4a5a5;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: right;
+            margin: 20px 0;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #6d4545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        
+        /* Estilos para el formulario de pago */
+        .payment-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover {
+            border-color: #6d4545;
+        }
+        
+        .payment-method.selected {
+            border-color: #6d4545;
+            background-color: #f0e8e8;
+        }
+        
+        .payment-method img {
+            height: 30px;
+        }
+        
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2em;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 5px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .payment-methods {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Icono del carrito -->
+    <div class="cart-icon" onclick="openCartModal()">
+        🛒
+        <span class="cart-count">0</span>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">Rosie's Gallery</div>
+        <p>la magia del arte y creatividad</p>
+    </header>
+    
+    <!-- Navegación -->
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#personalizados">Encargos Personalizados</a></li>
+            <li><a href="#sobre-mi">Sobre Mí</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Arte Único Hecho a Mano</h1>
+            <p>Cada pieza es una expresión única de creatividad y pasión</p>
+            <a href="#productos" class="btn btn-primary">Ver Colección</a>
+        </div>
+    </section>
+    
+    <!-- Barra de búsqueda -->
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar dibujos...">
+            <button>Buscar</button>
+        </div>
+    </div>
+    
+    <!-- Sección de Productos -->
+    <section class="container" id="productos">
+        <h2 class="section-title">Nuestra Colección</h2>
+        
+        <div class="products">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url(https://m.media-amazon.com/images/I/51f4apNu2DL._AC_UF894,1000_QL80_.jpg);"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Stich  en la  playa</h3>
+                    <div class="product-price">$120.00</div>
+                    <p class="product-description">Retrato animado de la pelicula lilo&stich.</p>
+                    <div class="product-actions">
+                        <button class="btn" onclick="addToCart('Retrato al crayola', 120)">Añadir al Carrito</button>
+                        <button class="btn btn-primary">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8VRjxfa87lffXoPzfpPOosacmJLIqBcMj6Q&s);"></div>
+                <div class="product-info">
+                    <h3 class="product-title">mix de personajes</h3>
+                    <div class="product-price">$95.00</div>
+                    <p class="product-description">personajes variados de disney y pixar.</p>
+                    <div class="product-actions">
+                        <button class="btn" onclick="addToCart('al acrilico', 95)">Añadir al Carrito</button>
+                        <button class="btn btn-primary">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://hips.hearstapps.com/hmg-prod/images/one-of-several-versions-of-the-painting-the-scream-by-the-news-photo-1652351980.jpg?resize=980:*');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">obra artistica</h3>
+                    <div class="product-price">$75.00</div>
+                    <p class="product-description">detalles dibujado a lápiz sobre papel Bristol.</p>
+                    <div class="product-actions">
+                        <button class="btn" onclick="addToCart('obra clasica ', 75)">Añadir al Carrito</button>
+                        <button class="btn btn-primary">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 4 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://m.media-amazon.com/images/I/71qu9yi4BFL._AC_UF894,1000_QL80_.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">la bella y la bestia</h3>
+                    <div class="product-price">$150.00</div>
+                    <p class="product-description">Ilustración de fantasía en tinta y acrílico, perfecta para amantes del género.</p>
+                    <div class="product-actions">
+                        <button class="btn" onclick="addToCart('Ilustración de Fantasía', 150)">Añadir al Carrito</button>
+                        <button class="btn btn-primary">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 5 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjL8w2UQH4D9MnjaD2KQJ67-Vul9Qso3ESxA&s');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">anime</h3>
+                    <div class="product-price">$110.00</div>
+                    <p class="product-description">Retrato de mascota pintado en acrílico sobre lienzo de 20x20cm.</p>
+                    <div class="product-actions">
+                        <button class="btn" onclick="addToCart('anime', 110)">Añadir al Carrito</button>
+                        <button class="btn btn-primary">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 6 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://img.freepik.com/vector-gratis/fruta-fresca-fresa-saludable_24908-80966.jpg?semt=ais_hybrid&w=740');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">frutal</h3>
+                    <div class="product-price">$180.00</div>
+                    <p class="product-description">Pintura  en óleo sobre lienzo de 30x40cm, lista para colgar.</p>
+                    <div class="product-actions">
+                        <button class="btn" onclick="addToCart(' al Óleo', 180)">Añadir al Carrito</button>
+                        <button class="btn btn-primary">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de Encargos Personalizados -->
+    <section class="container" id="personalizados">
+        <h2 class="section-title">Encargos Personalizados</h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p>¿Quieres un dibujo único y personalizado? En Rosie's Gallery creamos piezas especiales según tus preferencias. Puedes encargar retratos, ilustraciones de mascotas, paisajes de lugares especiales y mucho más.</p>
+            <p>El proceso es simple:</p>
+            <ol style="text-align: left; display: inline-block;">
+                <li>Describe tu idea o envíanos una foto de referencia</li>
+                <li>Recibe una cotización y plazo de entrega</li>
+                <li>Aprueba el boceto inicial</li>
+                <li>Recibe tu obra de arte terminada</li>
+            </ol>
+            <br>
+            <a href="#contacto" class="btn btn-primary">Solicitar Presupuesto</a>
+        </div>
+    </section>
+    
+    <!-- Sección Sobre Mí -->
+    <section class="container" id="sobre-mi">
+        <h2 class="section-title">Sobre Mí</h2>
+        <div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <img src=https://cdn.shopify.com/s/files/1/0780/2224/6743/files/Material-de-bellas-artes-pintura-1024x683.jpg alt="Rosie" style="width: 100%; border-radius: 10px;">
+            </div>
+            <div style="flex: 2; min-width: 300px;">
+                <h3>¡Hola! Soy Rocio</h3>
+                <p>Desde pequeña siempre tuve un lápiz en la mano. Lo que comenzó como un pasatiempo se convirtió en mi pasión y ahora en mi profesión.</p>
+                <p>Me especializo en técnicas tradicionales como carboncillo, lápiz, acuarela y acrílico. Cada obra que creo lleva un pedacito de mi corazón y mi dedicación absoluta a los detalles.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Suscríbete a Nuestro Boletín</h2>
+        <p>Recibe actualizaciones sobre nuevas obras, promociones especiales y consejos de arte.</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Tu correo electrónico" required>
+            <button type="submit">Suscribirse</button>
+        </form>
+    </section>
+    
+    <!-- Sección de Contacto -->
+    <section class="container" id="contacto">
+        <h2 class="section-title">Contacto</h2>
+        <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <h3>Información de Contacto</h3>
+                <p><strong>Email:</strong> rocio.raque.cisneros@gmail.com</p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/523339416305" style="color: #6d4545; text-decoration: none; font-weight: bold;">+52 33 3941 6305</a></p>
+                <p><strong>Horario:</strong> Lunes a Viernes, 9am - 5pm</p>
+                
+                <h3 style="margin-top: 30px;">Sígueme</h3>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                    <a href="#">🎨</a>
+                    <a href="#">🐦</a>
+                </div>
+            </div>
+            <div style="flex: 1; min-width: 300px;">
+                <h3>Envíanos un Mensaje</h3>
+                <form>
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" placeholder="Tu nombre" style="width: 100%; padding: 10px; border: 1px solid #d4a5a5; border-radius: 5px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <input type="email" placeholder="Tu email" style="width: 100%; padding: 10px; border: 1px solid #d4a5a5; border-radius: 5px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <textarea placeholder="Tu mensaje" rows="5" style="width: 100%; padding: 10px; border: 1px solid #d4a5a5; border-radius: 5px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">Términos y Condiciones</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Envíos y Devoluciones</a>
+            <a href="#">Preguntas Frecuentes</a>
+        </div>
+        <p>&copy; 2023 Rosie's Gallery. Todos los derechos reservados.</p>
+        <p>Dibujos hechos a mano con ❤️</p>
+    </footer>
+    
+    <!-- Modal del Carrito -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCartModal()">&times;</span>
+            <h2>Tu Carrito de Compras</h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Los items del carrito se añadirán aquí dinámicamente -->
+                <p>Tu carrito está vacío</p>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                Total: $0.00
+            </div>
+            
+            <!-- Formulario de pago (inicialmente oculto) -->
+            <div class="payment-form" id="paymentForm">
+                <h3>Método de Pago</h3>
+                
+                <div class="payment-methods">
+                    <div class="payment-method selected" onclick="selectPaymentMethod('credit')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa">
+                        <p>Tarjeta de Crédito/Débito</p>
+                    </div>
+                </div>
+                
+                <form id="creditCardForm">
+                    <div class="form-group">
+                        <label for="cardNumber">Número de Tarjeta</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardName">Nombre en la Tarjeta</label>
+                        <input type="text" id="cardName" placeholder="Nombre como aparece en la tarjeta">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiryDate">Fecha de Expiración</label>
+                            <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" oninput="formatExpiryDate(this)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bank">Banco Emisor</label>
+                        <select id="bank">
+                            <option value="">Selecciona tu banco</option>
+                            <option value="bbva">BBVA</option>
+                            <option value="banamex">Citibanamex</option>
+                            <option value="santander">Santander</option>
+                            <option value="hsbc">HSBC</option>
+                            <option value="banorte">Banorte</option>
+                            <option value="scotiabank">Scotiabank</option>
+                            <option value="banregio">Banregio</option>
+                            <option value="inbursa">Inbursa</option>
+                            <option value="bancoppel">Bancoppel</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" onclick="processPayment()">Pagar Ahora</button>
+                </form>
+            </div>
+            
+            <button class="checkout-btn" id="checkoutBtn" onclick="showPaymentForm()">Proceder al Pago</button>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Variables para el carrito
+        let cart = [];
+        let cartCount = 0;
+        let cartTotal = 0;
+        
+        // Función para abrir el modal del carrito
+        function openCartModal() {
+            document.getElementById('cartModal').style.display = 'flex';
+            updateCartModal();
+        }
+        
+        // Función para cerrar el modal del carrito
+        function closeCartModal() {
+            document.getElementById('cartModal').style.display = 'none';
+            // Ocultar formulario de pago si está visible
+            document.getElementById('paymentForm').style.display = 'none';
+            document.getElementById('checkoutBtn').style.display = 'block';
+        }
+        
+        // Función para añadir productos al carrito
+        function addToCart(productName, productPrice) {
+            cart.push({
+                name: productName,
+                price: productPrice
+            });
+            
+            cartCount++;
+            cartTotal += productPrice;
+            
+            document.querySelector('.cart-count').textContent = cartCount;
+            
+            // Mostrar notificación
+            alert(`${productName} ha sido añadido al carrito!`);
+        }
+        
+        // Función para actualizar el modal del carrito
+        function updateCartModal() {
+            const cartItemsElement = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItemsElement.innerHTML = '<p>Tu carrito está vacío</p>';
+                document.getElementById('checkoutBtn').style.display = 'none';
+            } else {
+                let itemsHTML = '';
+                
+                cart.forEach((item, index) => {
+                    itemsHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-image" style="background-image: url('https://via.placeholder.com/80')"></div>
+                            <div class="cart-item-details">
+                                <h4 class="cart-item-title">${item.name}</h4>
+                                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                                <div class="cart-item-remove" onclick="removeFromCart(${index})">Eliminar</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                cartItemsElement.innerHTML = itemsHTML;
+                document.getElementById('checkoutBtn').style.display = 'block';
+            }
+            
+            document.getElementById('cartTotal').textContent = `Total: $${cartTotal.toFixed(2)}`;
+        }
+        
+        // Función para eliminar items del carrito
+        function removeFromCart(index) {
+            const removedItem = cart.splice(index, 1)[0];
+            cartCount--;
+            cartTotal -= removedItem.price;
+            
+            document.querySelector('.cart-count').textContent = cartCount;
+            updateCartModal();
+        }
+        
+        // Función para mostrar el formulario de pago
+        function showPaymentForm() {
+            document.getElementById('paymentForm').style.display = 'block';
+            document.getElementById('checkoutBtn').style.display = 'none';
+        }
+        
+        // Función para seleccionar método de pago
+        function selectPaymentMethod(method) {
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+        
+        // Función para formatear el número de tarjeta
+        function formatCardNumber(input) {
+            // Eliminar todos los espacios existentes
+            let value = input.value.replace(/\s+/g, '');
+            
+            // Añadir un espacio cada 4 dígitos
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            
+            input.value = formattedValue;
+        }
+        
+        // Función para formatear la fecha de expiración
+        function formatExpiryDate(input) {
+            let value = input.value.replace(/\D/g, '');
+            
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            
+            input.value = value;
+        }
+        
+        // Función para procesar el pago
+        function processPayment() {
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, '');
+            const cardName = document.getElementById('cardName').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+            const bank = document.getElementById('bank').value;
+            
+            // Validaciones básicas
+            if (!cardNumber || cardNumber.length < 16) {
+                alert('Por favor ingresa un número de tarjeta válido');
+                return;
+            }
+            
+            if (!cardName) {
+                alert('Por favor ingresa el nombre como aparece en la tarjeta');
+                return;
+            }
+            
+            if (!expiryDate || expiryDate.length < 5) {
+                alert('Por favor ingresa una fecha de expiración válida (MM/AA)');
+                return;
+            }
+            
+            if (!cvv || cvv.length < 3) {
+                alert('Por favor ingresa un CVV válido');
+                return;
+            }
+            
+            if (!bank) {
+                alert('Por favor selecciona tu banco emisor');
+                return;
+            }
+            
+            // Simular procesamiento de pago
+            alert(`Pago procesado exitosamente por $${cartTotal.toFixed(2)}. Gracias por tu compra!`);
+            
+            // Limpiar carrito
+            cart = [];
+            cartCount = 0;
+            cartTotal = 0;
+            document.querySelector('.cart-count').textContent = '0';
+            
+            // Cerrar modal
+            closeCartModal();
+        }
+        
+        // Cerrar el modal si se hace clic fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                closeCartModal();
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
